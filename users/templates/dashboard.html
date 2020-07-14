@@ -1,0 +1,118 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .btn.btn-circle {
+        line-height: 30px;
+        padding: 0;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        background-color: #3a5164;
+        color: #ffffff;
+        width: 150px;
+        height: 150px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .btn-circle div{
+      margin-top: 40px;
+    }
+    .mydash {
+        border:1px solid #57889c;
+        padding:10px;
+        margin:10px;
+    }
+    .col-lg-2 {
+        width:14.667%;
+    }
+    </style>      
+        <!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>User Dashboard</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="registration-bg">
+	<div class="container">
+        {% if request.session.user_level_id == 1 %}		
+        <div class="container w">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/tutorial/add" class="btn btn-default btn-circle"><div>Add<br>Tutorial</div></a>	
+                </div><!--/.col-->	
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/topics/add" class="btn btn-default btn-circle"><div>Add<br>Topics</div></a>	
+                </div><!--/.col-->	
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/course/add" class="btn btn-default btn-circle"><div>Add<br>Course</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/question/add" class="btn btn-default btn-circle"><div>Add<br>Questions</div></a>	
+                </div><!--/.col-->				
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/add" class="btn btn-default btn-circle"><div>Add<br>Users</div></a>	
+                </div><!--/.col-->		
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/tutorial" class="btn btn-default btn-circle"><div>Tutorial<br>Report</div></a>	
+                </div><!--/.col-->		
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/report/1" class="btn btn-default btn-circle"><div>Tutors<br>Report</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/report/2" class="btn btn-default btn-circle"><div>Students<br>Report</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/question" class="btn btn-default btn-circle"><div>Questions<br>Report</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/question/result_view" class="btn btn-default btn-circle"><div>Results<br>Report</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/topics" class="btn btn-default btn-circle"><div>Topics<br>Report</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/update/{{ request.session.user_id }}/" class="btn btn-default btn-circle"><div>My<br>Account</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/changepassword" class="btn btn-default btn-circle"><div>Change<br>Password</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/logout" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>	
+                </div><!--/.col-->
+                
+            </div><!-- row -->				  
+    
+            <br>
+            <br>
+        </div>
+        {% endif %}
+        {% if request.session.user_level_id == 2 %}		
+        <div class="container w">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/course/list" class="btn btn-default btn-circle"><div>Course<br>Lists</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/question/result_view" class="btn btn-default btn-circle"><div>My<br>Results</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/update/{{ request.session.user_id }}/" class="btn btn-default btn-circle"><div>My<br>Account</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/changepassword" class="btn btn-default btn-circle"><div>Change<br>Password</div></a>	
+                </div><!--/.col-->
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
+                    <a href="/users/logout" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>	
+                </div><!--/.col-->				
+            </div><!-- row -->
+            <br>
+            <br>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+        

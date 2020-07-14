@@ -1,0 +1,162 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#timesheet_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<style>
+	th {
+		padding: 5px;
+		color: #000000;
+		font-weight: bold;
+	}
+</style>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>User Question Slip</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+			
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+					User Question Slip
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+					<table style="width:100%">
+							<tr>
+								<td style="text-align:center; font-size:14px; font-weight:bold; font-family:Arial, Helvetica, sans-serif">
+									FreeProjectz Pvt. Ltd.<br>
+									S-503<br>
+									Sector : 63<br>
+									Noida - 201301<br>
+									Uttar Pradesh
+									<h2>Payslip for the period of {{questionDetails.month_name}} {{questionDetails.question_year}}</h2>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table style="width:100%">
+										<tr>
+											<th style="width:25%">User ID</th>
+											<td style="width:25%">: {{questionDetails.user_id}}</td>
+											<th style="width:25%">Name</th>
+											<td style="width:25%">: {{questionDetails.user_first_name}}</td>
+										</tr>
+										<tr>
+											<th>Topics</th>
+											<td>: {{questionDetails.topics_name}} </td>
+											<th>Course</th>
+											<td>: {{questionDetails.course_name}} </td>
+										</tr>
+										<tr>
+											<th>Date of Joining</th>
+											<td>: {{questionDetails.user_doj}} </td>
+											<th>PF Account Number</th>
+											<td>: {{questionDetails.user_pf_account}}</td>
+										</tr>
+										<tr>
+											<th>Days of Working</th>
+											<td>: {{questionDetails.question_title}}</td>
+											<th>Question Account No.</th>
+											<td>: {{questionDetails.user_account_no}} </td>
+										</tr>
+										<tr>
+											<th>Transaction ID</th>
+											<td>: {{questionDetails.question_id}}</td>
+											<th></th>
+											<td></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table style="width:100%">
+										<tr style="border-bottom:1px solid #000000; background-color: #cccccc;">
+											<th style="width:25%; height:30px; border-bottom:2px solid #000000">Earnings</th>
+											<th style="width:25%; height:30px; border-bottom:2px solid #000000">Amount</th>
+											<th style="width:25%; height:30px; border-bottom:2px solid #000000">Deductions</th>
+											<th style="width:25%; height:30px; border-bottom:2px solid #000000">Amount</th>
+										</tr>
+										<tr>
+											<th>Basic Pay</th>
+											<td>: {{questionDetails.question_option1}}</td>
+											<th>Insurance</th>
+											<td>: 0</td>
+										</tr>
+										<tr>
+											<th>Dearness Allowance</th>
+											<td>: {{questionDetails.question_answer}}</td>
+											<th>Provident Fund</th>
+											<td>: {{questionDetails.question_dpf}}</td>
+										</tr>
+										<tr>
+											<th>Medical Allowance</th>
+											<td>: {{questionDetails.question_option3}}</td>
+											<th>Professional Tax</th>
+											<td>: {{questionDetails.question_dtax}}</td>
+										</tr>
+										<tr>
+											<th>House Rent Allowance</th>
+											<td>: {{questionDetails.question_option2}}</td>
+											<th>&nbsp;</th>
+											<th>&nbsp;</th>
+										</tr>
+										<tr>
+											<th>Conveyance Allowance</th>
+											<td>: {{questionDetails.question_ca}}</td>
+											<th>&nbsp;</th>
+											<th>&nbsp;</th>
+										</tr>
+										<tr>
+											<th>Reimbursement</th>
+											<td>: {{questionDetails.question_reimbursement}}</td>
+											<th>&nbsp;</th>
+											<th>&nbsp;</th>
+										</tr>
+										<tr style="background-color:#cccccc">
+											<th style="border-top:2px solid">Total Earnings</th>
+											<th style="border-top:2px solid">: {{questionDetails.question_total}}</th>
+											<th style="border-top:2px solid">Total Deduction</th>
+											<th style="border-top:2px solid">: {{questionDetails.question_dedc}}</th>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+			
+				
+				<div style="margin-top:50px; width:100px;">
+				<button class="btn btn-lg btn-login btn-block" type="button" onclick="window.print();">Print</button>
+				</div>
+			</div>
+			<input type="hidden" name="act" value="save_question">
+			<input type="hidden" name="question_id" value="{{questionlist.question_id}}">
+		</form>
+	</div>
+</div>
+<!--container end-->
+{% endblock content %}

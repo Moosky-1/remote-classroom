@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#appointment_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{{tutorialDetails.tutorial_title}}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+			
+				<div class="col-xs-6 form-group" style="width:90%">
+					<h4 style="font-weight:bold">{{tutorialDetails.tutorial_title}}</h4>
+				</div>
+			
+				<div style="width:90%" class="col-xs-6 form-group" style="clear:both">{{tutorialDetails.tutorial_description}}</div>
+				<div style="clear:both"></div>
+				<div style="float:right;">
+					<a href="/tutorial/list/{{tutorialDetails.tutorial_topic_id}}" class="btn btn-info" style="color:#FFFFFF">Back to Lists</a>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<input type="hidden" name="act" value="save_tutorial">
+			<input type="hidden" name="user_id" value="{{tutoriallist.tutorial_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_topic_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}

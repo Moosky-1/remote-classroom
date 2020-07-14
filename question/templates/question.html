@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+	jQuery(function () {
+		jQuery("#timesheet_date").datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: "0:+1",
+			dateFormat: 'd MM,yy'
+		});
+	});
+</script>
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add Question
+				{% elif fn == "update" %}
+					Update Question
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+			
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Select Topic</label> 
+					<select name="question_topic_id" required class="form-control" placeholder="Select Topic" autofocus="" />
+					<option value="">Please Select</option>
+					{% for topics in topicslist %}
+						<option value="{{ topics.topics_id }}" {% ifequal topics.topics_id|stringformat:"s" questionDetails.question_topic_id %} selected="selected"{% endifequal %}>{{topics.topics_name}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div style="clear:both"></div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Full Question </label>
+					<input type="text" value="{{questionDetails.question_title}}" name="question_title" id="question_title" class="form-control" placeholder="Full Question">
+				</div>
+				<div style="clear:both"></div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Option 1</label>
+					<input type="text" value="{{questionDetails.question_option1}}" name="question_option1" id="question_option1" class="form-control" placeholder="Option 1">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Option 2</label>
+					<input type="text" value="{{questionDetails.question_option2}}" name="question_option2" id="question_option2" class="form-control" placeholder="Option 2">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Option 3</label>
+					<input type="text" value="{{questionDetails.question_option3}}" name="question_option3" id="question_option3" class="form-control" placeholder="Option 3">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Option 4</label>
+					<input type="text" value="{{questionDetails.question_option4}}" name="question_option4" id="question_option4" class="form-control" placeholder="Option 4">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="pwd">Answer</label>
+					<input type="text" value="{{questionDetails.question_answer}}" name="question_answer" id="question_answer" class="form-control" placeholder="Answer">
+				</div>
+				
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_question">
+			<input type="hidden" name="question_id" value="{{questionlist.question_id}}">
+		</form>
+	</div>
+</div>
+{% if appointmentdetails %}
+<script>
+	$(".update-appointment").hide();
+</script>
+{% endif %}
+{% if request.session.appointment_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}
